@@ -33,8 +33,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import org.microshed.testing.jupiter.MicroShedTest;
+import org.microshed.testing.SharedContainerConfig;
+
+@MicroShedTest
+@SharedContainerConfig(EndpointSharedApplication.class)
 @TestMethodOrder(OrderAnnotation.class)
-public class EndpointIT {
+public class EndpointMicroshedIT {
 
     private static String port = System.getProperty("http.port");
     private static String context = System.getProperty("context.root");

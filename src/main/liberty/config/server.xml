@@ -3,6 +3,7 @@
   <featureManager>
     <feature>jaxrs-2.1</feature>
     <feature>mpOpenAPI-1.0</feature>
+    <feature>mpHealth-2.1</feature>    
   </featureManager>
 
   <httpEndpoint httpPort="${default.http.port}" httpsPort="${default.https.port}"

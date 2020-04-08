@@ -20,50 +20,64 @@
     <version.maven-failsafe-plugin>2.22.2</version.maven-failsafe-plugin>
     <version.maven-surefire-plugin>2.22.2</version.maven-surefire-plugin>
     <version.maven-war-plugin>3.2.3</version.maven-war-plugin>
+    <!-- Dependency versions -->
+    <version.microprofile-dependency>3.2</version.microprofile-dependency>
+    <version.jakarta-dependency>8.0.0</version.jakarta-dependency>
+    <version.microshed-dependency>0.6.1.1</version.microshed-dependency>
+    <version.junit-dependency>5.5.2</version.junit-dependency>
+    <version.cxf-dependency>3.3.4</version.cxf-dependency>
+    <version.cxf-extension-dependency>3.3.4</version.cxf-extension-dependency>
+    <version.yasson-dependency>1.0.5</version.yasson-dependency>
     <!-- Liberty configuration -->
     <liberty.var.default.http.port>9080</liberty.var.default.http.port>
     <liberty.var.default.https.port>9443</liberty.var.default.https.port>
     <liberty.var.app.context.root>RestServer</liberty.var.app.context.root>
     <liberty.var.project.name>${project.artifactId}</liberty.var.project.name>
   </properties>
-
+  
   <dependencies>
     <dependency>
       <groupId>org.eclipse.microprofile</groupId>
       <artifactId>microprofile</artifactId>
-      <version>3.2</version>
+      <version>${version.microprofile-dependency}</version>
       <type>pom</type>
       <scope>provided</scope>
     </dependency>
     <dependency>
-        <groupId>jakarta.platform</groupId>
-        <artifactId>jakarta.jakartaee-web-api</artifactId>
-        <version>8.0.0</version>
-        <scope>provided</scope>
+      <groupId>jakarta.platform</groupId>
+      <artifactId>jakarta.jakartaee-web-api</artifactId>
+      <version>${version.jakarta-dependency}</version>
+      <scope>provided</scope>
     </dependency>    
+      <dependency>
+      <groupId>org.microshed</groupId>
+      <artifactId>microshed-testing-liberty</artifactId>
+      <version>${version.microshed-dependency}</version>
+      <scope>test</scope>
+    </dependency>
     <!-- For tests -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.5.2</version>
+      <version>${version.junit-dependency}</version>
       <scope>test</scope>
     </dependency>      
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-rs-client</artifactId>
-      <version>3.3.4</version>
+      <version>${version.cxf-dependency}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-rs-extension-providers</artifactId>
-      <version>3.3.4</version>
+      <version>${version.cxf-extension-dependency}</version>
       <scope>test</scope>
     </dependency>      
     <dependency>
       <groupId>org.eclipse</groupId>
       <artifactId>yasson</artifactId>
-      <version>1.0.5</version>
+      <version>${version.yasson-dependency}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

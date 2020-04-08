@@ -20,12 +20,12 @@ public class BookStore {
 	private static BookStore INSTANCE = new BookStore();
 	
 	private BookStore() {
-		books.put("123", new Book("123", "Goodnight Moon", "Margaret Wise Brown",
-				"Wealthy rabbit has trouble falling to sleep"));
-		books.put("456", new Book("456", "Adventures of Tom Sawyer", "Mark Twain",
-				"What kids did before fortnite"));
-		books.put("789", new Book("789", "The Outsiders", "S.E. Hinton",
-				"Like Westside Story, minus dancing"));
+		books.put("123", new Book("123", "The fall of the Emperor", "Nathan T",
+				"The story of a great Emperor"));
+		books.put("456", new Book("456", "Adventures of Willy", "James N",
+				"The life of a great dog"));
+		books.put("789", new Book("789", "The rise of the Emperor", "Mary B",
+				"The story of a great Emperor part 2"));
 	}
 	
 	public static BookStore getBookStore() {

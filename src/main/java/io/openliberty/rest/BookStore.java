@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2019 IBM Corporation and others.
+ * Copyright (c) 2020 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -20,11 +20,11 @@ public class BookStore {
 	private static BookStore INSTANCE = new BookStore();
 	
 	private BookStore() {
-		books.put("123", new Book("123", "The fall of the Emperor", "Nathan T",
+		books.put("123", new BookApplication("123", "The fall of the Emperor", "Nathan T",
 				"The story of a great Emperor"));
-		books.put("456", new Book("456", "Adventures of Willy", "James N",
+		books.put("456", new BookApplication("456", "Adventures of Willy", "James N",
 				"The life of a great dog"));
-		books.put("789", new Book("789", "The rise of the Emperor", "Mary B",
+		books.put("789", new BookApplication("789", "The rise of the Emperor", "Mary B",
 				"The story of a great Emperor part 2"));
 	}
 	
@@ -32,21 +32,21 @@ public class BookStore {
 		return INSTANCE;
 	}
 	
-	private Map<String,Book> books = new HashMap<>();
+	private Map<String,BookApplication> books = new HashMap<>();
 	
-	public Collection<Book> viewAllBooks() {
+	public Collection<BookApplication> viewAllBooks() {
 		return books.values();
 	}
 	
-	public Book takeBook(String bookId) {
+	public BookApplication takeBook(String bookId) {
 		return books.remove(bookId);
 	}
 	
-	public void depositBook(Book newBook) {
+	public void depositBook(BookApplication newBook) {
 		books.put(newBook.getId(), newBook);
 	}
 	
-	public void updateBook(String bookId, Book updatedBook) {
+	public void updateBook(String bookId, BookApplication updatedBook) {
 		books.put(bookId, updatedBook);
 	}
 }

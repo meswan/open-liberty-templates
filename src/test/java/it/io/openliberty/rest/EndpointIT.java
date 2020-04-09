@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2019 IBM Corporation and others.
+ * Copyright (c) 2020 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,6 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
+
 package it.io.openliberty.rest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -73,7 +74,7 @@ public class EndpointIT {
     @Test
     @DisplayName("GET - Verifying initial state of database")
     @Order(1)
-    public void CheckInitialDatabase() {
+    public void CheckIfInitialDatabaseIsNotEmpty() {
 
         Response response = getAllBooks();
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus(),
@@ -97,7 +98,8 @@ public class EndpointIT {
         String port = System.getProperty("http.port");
         String context = System.getProperty("context.root");
         String url = "http://localhost:" + port + "/" + context + "/";
-        String updatePost = "{\"author\":\"Nathan T Gold\",\"description\":\"The story of a great Emperor\",\"id\":\"123\",\"title\":\"The fall of the Emperor\"}";
+        String updatePost = "{\"author\":\"Nathan T Gold\",\"description\":\"The story of a great Emperor\",\"id\":\"123\"" +
+                            ",\"title\":\"The fall of the Emperor\"}";
         JsonObject obj = jsonFromString(updatePost);
         Client client = ClientBuilder.newClient();
 

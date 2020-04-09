@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2019 IBM Corporation and others.
+ * Copyright (c) 2020 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,154 +8,89 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
+
 package it.io.openliberty.rest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import io.openliberty.rest.BookApplication;
+import io.openliberty.rest.BookResource;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.io.StringReader;
-
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
-import javax.json.JsonValue;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.Response;
+import java.util.Collection;
 
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.microshed.testing.jaxrs.RESTClient;
 import org.microshed.testing.jupiter.MicroShedTest;
 import org.microshed.testing.SharedContainerConfig;
+import org.microshed.testing.jaxrs.RESTClient;
 
 @MicroShedTest
 @SharedContainerConfig(EndpointSharedApplication.class)
 @TestMethodOrder(OrderAnnotation.class)
 public class EndpointMicroshedIT {
 
-    private static String port = System.getProperty("http.port");
-    private static String context = System.getProperty("context.root");
-    private static String url = "http://localhost:" + port + "/" + context + "/";
+    @RESTClient
+    public static BookResource bookrsc;
     
-    private static JsonObject jsonFromString(String jsonObjectStr) {
-
-        JsonReader jsonReader = Json.createReader(new StringReader(jsonObjectStr));
-        JsonObject jsonObject = jsonReader.readObject();
-        jsonReader.close();
-    
-        return jsonObject;
-    }
-
-    private static Response getAllBooks(){
-
-        Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(url + "v1/books");
-        Response response = target.request().get();
-        return response;
-    }
-
-    private static JsonValue getJsonValue(JsonObject obj){
-
-        Response getResponse = getAllBooks();
-        String json = getResponse.readEntity(String.class);
-        InputStream targetStream = new ByteArrayInputStream(json.getBytes());
-        JsonReader reader = Json.createReader(targetStream);
-
-        JsonArray jsonArr = reader.readArray();
-        JsonValue jsonValue = jsonArr.get(0);
-
-        return jsonValue;
-    }
-
     @Test
     @DisplayName("GET - Verifying initial state of database")
     @Order(1)
-    public void CheckInitialDatabase() {
+    public void CheckIfInitialDatabaseIsNotEmpty() {
 
-        Response response = getAllBooks();
-        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus(),
-                     "Incorrect response code from " + url);
-
-        String json = response.readEntity(String.class);
-
-        assertEquals("[{\"author\":\"Nathan T\",\"description\":\"The story of a great Emperor\"," +
-                    "\"id\":\"123\",\"title\":\"The fall of the Emperor\"},{\"author\":\"James N\",\"description\":" +
-                    "\"The life of a great dog\",\"id\":\"456\",\"title\":\"Adventures of Willy\"}," +
-                    "{\"author\":\"Mary B\",\"description\":\"The story of a great Emperor part 2\",\"id\":\"789\","+
-                    "\"title\":\"The rise of the Emperor\"}]", json,
-                     "The startup database should contain the above data");
-        response.close();
+        assertNotNull(bookrsc.listBooks());
     }
 
     @Test
     @DisplayName("POST - Updating author's name in book with id 123")
     @Order(2)
     public void UpdateBook() {
-        String port = System.getProperty("http.port");
-        String context = System.getProperty("context.root");
-        String url = "http://localhost:" + port + "/" + context + "/";
-        String updatePost = "{\"author\":\"Nathan T Gold\",\"description\":\"The story of a great Emperor\",\"id\":\"123\",\"title\":\"The fall of the Emperor\"}";
-        JsonObject obj = jsonFromString(updatePost);
-        Client client = ClientBuilder.newClient();
 
-        WebTarget target = client.target(url + "v1/books");
-        Response response = target.request().post(Entity.json(obj.toString()));
-
-        JsonValue jsonValue = getJsonValue(obj);
-
-        assertEquals(jsonValue.asJsonObject().getString("author"), "Nathan T Gold", "Database does not reflect updated book");
-        response.close();
+        BookApplication book = new BookApplication("123", "The fall of the Emperor", "Nathan T Gold", "The story of a great Emperor");
+        bookrsc.updateBook("123", book);
+        Collection<BookApplication> bookCollection = bookrsc.listBooks();
+        for (BookApplication bookApp: bookCollection){
+            if (bookApp.getId().equals("123")){
+                assertEquals("Nathan T Gold", bookApp.getAuthor(), "Database does not reflect updated book");
+            }
+        }
     }
 
     @Test
     @DisplayName("DELETE - Deleting book with id 123")
     @Order(3)
     public void DeleteBook() {
-        String port = System.getProperty("http.port");
-        String context = System.getProperty("context.root");
-        String url = "http://localhost:" + port + "/" + context + "/";
 
-        Client client = ClientBuilder.newClient();
+        assertNotNull(bookrsc.takeBook("123"));
 
-        WebTarget target = client.target(url + "v1/books/123");
-        Response response = target.request().delete();
-        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus(),
-                     "Incorrect response code from " + url);
+        Collection<BookApplication> bookCollection = bookrsc.listBooks();
 
-        String json = response.readEntity(String.class);
-
-        assertEquals("{\"author\":\"Nathan T Gold\",\"description\":\"The story of a great Emperor\"," +
-                    "\"id\":\"123\",\"title\":\"The fall of the Emperor\"}", json,
-                     "Database does not reflect deleted book");
-        response.close();
+        for (BookApplication bookApp: bookCollection) {
+            assertFalse(bookApp.getId().equals("123"), "Database does not reflect deleted book");
+        }   
     }
 
     @Test
     @DisplayName("PUT - Adding book with id 123")
     @Order(4)
     public void addBook() {
-        String port = System.getProperty("http.port");
-        String context = System.getProperty("context.root");
-        String url = "http://localhost:" + port + "/" + context + "/";
-        String newBook = "{\"author\":\"Nathan T\",\"description\":\"The story of a great Emperor\"," +
-                            "\"id\":\"123\",\"title\":\"The fall of the Emperor\"}";
-        JsonObject obj = jsonFromString(newBook);
-        Client client = ClientBuilder.newClient();
 
-        WebTarget target = client.target(url + "v1/books/123");
-        Response response = target.request().put(Entity.json(obj.toString()));
+        BookApplication book = new BookApplication("123", "The fall of the Emperor", "Nathan T", "The story of a great Emperor");
+        bookrsc.depositBook(book);
+        boolean bookFound = false;
 
-        JsonValue jsonValue = getJsonValue(obj);
-
-        assertEquals(jsonValue.asJsonObject().getString("id"), "123", "Database does not reflect new book");
-        response.close();
+        Collection<BookApplication> bookCollection = bookrsc.listBooks();
+        for (BookApplication bookApp: bookCollection){
+            if (bookApp.getId().equals("123")){
+                bookFound = true;
+            }
+        }
+        assertTrue(bookFound, "Database does not reflect new book");
     }
 }

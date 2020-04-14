@@ -16,18 +16,19 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <failOnMissingWebXml>false</failOnMissingWebXml>
     <!-- Plugin versions -->
-    <version.liberty-maven-plugin>3.1</version.liberty-maven-plugin>
+    <version.liberty-maven-plugin>3.2</version.liberty-maven-plugin>
     <version.maven-failsafe-plugin>2.22.2</version.maven-failsafe-plugin>
     <version.maven-surefire-plugin>2.22.2</version.maven-surefire-plugin>
     <version.maven-war-plugin>3.2.3</version.maven-war-plugin>
     <!-- Dependency versions -->
-    <version.microprofile-dependency>3.2</version.microprofile-dependency>
+    <version.microprofile-dependency>3.3</version.microprofile-dependency>
     <version.jakarta-dependency>8.0.0</version.jakarta-dependency>
     <version.microshed-dependency>0.6.1.1</version.microshed-dependency>
-    <version.junit-dependency>5.5.2</version.junit-dependency>
-    <version.cxf-dependency>3.3.4</version.cxf-dependency>
-    <version.cxf-extension-dependency>3.3.4</version.cxf-extension-dependency>
+    <version.junit-dependency>5.6.2</version.junit-dependency>
+    <version.cxf-dependency>3.3.6</version.cxf-dependency>
+    <version.cxf-extension-dependency>3.3.6</version.cxf-extension-dependency>
     <version.yasson-dependency>1.0.5</version.yasson-dependency>
+    <version.log4j-dependency>1.7.30</version.log4j-dependency>
     <!-- Liberty configuration -->
     <liberty.var.default.http.port>9080</liberty.var.default.http.port>
     <liberty.var.default.https.port>9443</liberty.var.default.https.port>
@@ -78,6 +79,12 @@
       <groupId>org.eclipse</groupId>
       <artifactId>yasson</artifactId>
       <version>${version.yasson-dependency}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>${version.log4j-dependency}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

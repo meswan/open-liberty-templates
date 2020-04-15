@@ -35,77 +35,60 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class BookResource {
-	@Inject
-	BookStore bookStore;
+    @Inject
+    BookStore bookStore;
 
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-    @APIResponse(
-        responseCode = "200",
-        description = "Obtain a list of all books in the database.",
-        content = @Content(
-            mediaType = "application/json",
-            schema = @Schema(
-                type = SchemaType.OBJECT,
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @APIResponse(responseCode = "200",
+                description = "Obtain a list of all books in the database.", 
+                content = @Content(mediaType = "application/json", 
+                schema = @Schema(type = SchemaType.OBJECT, 
                 implementation = BookApplication.class)))
-    @Operation(
-        summary = "GET operation to retrieve all books.",
-        description = "Obtain a list of all books in the database.")
-	public Collection<BookApplication> listBooks() {
-		return bookStore.viewAllBooks();
-	}
-	
-	@Produces(MediaType.APPLICATION_JSON)
-    @APIResponse(
-        responseCode = "200",
-        description = "Delete a book by its ID.",
-        content = @Content(
-            mediaType = "application/json",
-            schema = @Schema(
-                type = SchemaType.OBJECT,
+    @Operation(summary = "GET operation to retrieve all books.", 
+               description = "Obtain a list of all books in the database.")
+    public Collection<BookApplication> listBooks() {
+        return bookStore.viewAllBooks();
+    }
+
+    @Produces(MediaType.APPLICATION_JSON)
+    @APIResponse(responseCode = "200", 
+                description = "Delete a book by its ID.", 
+                content = @Content(mediaType = "application/json", 
+                schema = @Schema(type = SchemaType.OBJECT, 
                 implementation = BookApplication.class)))
-    @Operation(
-        summary = "DELETE operation to remove a book from the database.",
-        description = "Delete a book by its ID.")
-	@Path("/{id}")
-	@DELETE
-	public BookApplication takeBook(@PathParam("id") String bookId) {
-		return bookStore.takeBook(bookId);
-	}
-	
-	@Produces(MediaType.APPLICATION_JSON)
-    @APIResponse(
-        responseCode = "204",
-        description = "Update information on a book by its ID.",
-        content = @Content(
-            mediaType = "application/json",
-            schema = @Schema(
-                type = SchemaType.OBJECT,
+    @Operation(summary = "DELETE operation to remove a book from the database.", 
+              description = "Delete a book by its ID.")
+    @Path("/{id}")
+    @DELETE
+    public BookApplication takeBook(@PathParam("id") String bookId) {
+        return bookStore.takeBook(bookId);
+    }
+
+    @Produces(MediaType.APPLICATION_JSON)
+    @APIResponse(responseCode = "204", 
+                description = "Update information on a book by its ID.", 
+                content = @Content(mediaType = "application/json", 
+                schema = @Schema(type = SchemaType.OBJECT, 
                 implementation = BookApplication.class)))
-    @Operation(
-        summary = "POST operation to update a book.",
-		description = "Update information on a book by its ID.")
-	@POST
-	public void depositBook(BookApplication newBook) {
-		bookStore.depositBook(newBook);
-	}
-	
-	@Produces(MediaType.APPLICATION_JSON)
-    @APIResponse(
-        responseCode = "204",
-        description = "Add a book to the database.",
-        content = @Content(
-            mediaType = "application/json",
-            schema = @Schema(
-                type = SchemaType.OBJECT,
+    @Operation(summary = "POST operation to update a book.", 
+              description = "Update information on a book by its ID.")
+    @POST
+    public void depositBook(BookApplication newBook) {
+        bookStore.depositBook(newBook);
+    }
+
+    @Produces(MediaType.APPLICATION_JSON)
+    @APIResponse(responseCode = "204", 
+                description = "Add a book to the database.", 
+                content = @Content(mediaType = "application/json", 
+                schema = @Schema(type = SchemaType.OBJECT, 
                 implementation = BookApplication.class)))
-    @Operation(
-        summary = "PUT operation to add a book to the database.",
-        description = "Add a book to the database.")
-	@Path("/{id}")
-	@PUT
-	public void updateBook(@PathParam("id") String bookId, BookApplication book) {
-		bookStore.updateBook(bookId, book);
-	}
+    @Operation(summary = "PUT operation to add a book to the database.", 
+              description = "Add a book to the database.")
+    @Path("/{id}")
+    @PUT
+    public void updateBook(@PathParam("id") String bookId, BookApplication book) {
+        bookStore.updateBook(bookId, book);
+    }
 }
-

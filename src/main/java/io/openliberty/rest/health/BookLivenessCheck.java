@@ -32,8 +32,8 @@ public class BookLivenessCheck implements HealthCheck {
     long memMax = memBean.getHeapMemoryUsage().getMax();
 
     return HealthCheckResponse.named(BookResource.class.getSimpleName() + "Liveness")
-                              .withData("memory used", memUsed)
-                              .withData("memory max", memMax)
-                              .state(memUsed < memMax * 0.9).build();
+        .withData("memory used", memUsed)
+        .withData("memory max", memMax)
+        .state(memUsed < memMax * 0.9).build();
   }
 }

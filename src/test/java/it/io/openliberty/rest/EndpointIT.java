@@ -40,17 +40,17 @@ public class EndpointIT {
     private static String port = System.getProperty("http.port");
     private static String context = System.getProperty("context.root");
     private static String url = "http://localhost:" + port + "/" + context + "/";
-    
+
     private static JsonObject jsonFromString(String jsonObjectStr) {
 
         JsonReader jsonReader = Json.createReader(new StringReader(jsonObjectStr));
         JsonObject jsonObject = jsonReader.readObject();
         jsonReader.close();
-    
+
         return jsonObject;
     }
 
-    private static Response getAllBooks(){
+    private static Response getAllBooks() {
 
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(url + "v1/books");
@@ -58,7 +58,7 @@ public class EndpointIT {
         return response;
     }
 
-    private static JsonValue getJsonValue(JsonObject obj){
+    private static JsonValue getJsonValue(JsonObject obj) {
 
         Response getResponse = getAllBooks();
         String json = getResponse.readEntity(String.class);
@@ -77,17 +77,18 @@ public class EndpointIT {
     public void CheckIfInitialDatabaseIsNotEmpty() {
 
         Response response = getAllBooks();
-        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus(),
-                     "Incorrect response code from " + url);
+        assertEquals(Response.Status.OK.getStatusCode(), 
+                    response.getStatus(), 
+                    "Incorrect response code from " + url);
 
         String json = response.readEntity(String.class);
 
-        assertEquals("[{\"author\":\"Nathan T\",\"description\":\"The story of a great Emperor\"," +
-                    "\"id\":\"123\",\"title\":\"The fall of the Emperor\"},{\"author\":\"James N\",\"description\":" +
-                    "\"The life of a great dog\",\"id\":\"456\",\"title\":\"Adventures of Willy\"}," +
-                    "{\"author\":\"Mary B\",\"description\":\"The story of a great Emperor part 2\",\"id\":\"789\","+
-                    "\"title\":\"The rise of the Emperor\"}]", json,
-                     "The startup database should contain the above data");
+        assertEquals("[{\"author\":\"Nathan T\",\"description\":\"The story of a great Emperor\","
+                + "\"id\":\"123\",\"title\":\"The fall of the Emperor\"},{\"author\":\"James N\",\"description\":"
+                + "\"The life of a great dog\",\"id\":\"456\",\"title\":\"Adventures of Willy\"},"
+                + "{\"author\":\"Mary B\",\"description\":\"The story of a great Emperor part 2\",\"id\":\"789\","
+                + "\"title\":\"The rise of the Emperor\"}]", json,
+                "The startup database should contain the above data");
         response.close();
     }
 
@@ -98,8 +99,8 @@ public class EndpointIT {
         String port = System.getProperty("http.port");
         String context = System.getProperty("context.root");
         String url = "http://localhost:" + port + "/" + context + "/";
-        String updatePost = "{\"author\":\"Nathan T Gold\",\"description\":\"The story of a great Emperor\",\"id\":\"123\"" +
-                            ",\"title\":\"The fall of the Emperor\"}";
+        String updatePost = "{\"author\":\"Nathan T Gold\",\"description\":\"The story of a great Emperor\","
+                            + "\"id\":\"123\",\"title\":\"The fall of the Emperor\"}";
         JsonObject obj = jsonFromString(updatePost);
         Client client = ClientBuilder.newClient();
 
@@ -108,7 +109,8 @@ public class EndpointIT {
 
         JsonValue jsonValue = getJsonValue(obj);
 
-        assertEquals(jsonValue.asJsonObject().getString("author"), "Nathan T Gold", "Database does not reflect updated book");
+        assertEquals(jsonValue.asJsonObject().getString("author"), "Nathan T Gold",
+                "Database does not reflect updated book");
         response.close();
     }
 
@@ -124,14 +126,15 @@ public class EndpointIT {
 
         WebTarget target = client.target(url + "v1/books/123");
         Response response = target.request().delete();
-        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus(),
-                     "Incorrect response code from " + url);
+        assertEquals(Response.Status.OK.getStatusCode(), 
+                    response.getStatus(), 
+                    "Incorrect response code from " + url);
 
         String json = response.readEntity(String.class);
 
-        assertEquals("{\"author\":\"Nathan T Gold\",\"description\":\"The story of a great Emperor\"," +
-                    "\"id\":\"123\",\"title\":\"The fall of the Emperor\"}", json,
-                     "Database does not reflect deleted book");
+        assertEquals("{\"author\":\"Nathan T Gold\",\"description\":\"The story of a great Emperor\","
+                     + "\"id\":\"123\",\"title\":\"The fall of the Emperor\"}", 
+                     json, "Database does not reflect deleted book");
         response.close();
     }
 
@@ -142,8 +145,8 @@ public class EndpointIT {
         String port = System.getProperty("http.port");
         String context = System.getProperty("context.root");
         String url = "http://localhost:" + port + "/" + context + "/";
-        String newBook = "{\"author\":\"Nathan T\",\"description\":\"The story of a great Emperor\"," +
-                            "\"id\":\"123\",\"title\":\"The fall of the Emperor\"}";
+        String newBook = "{\"author\":\"Nathan T\",\"description\":\"The story of a great Emperor\","
+                       + "\"id\":\"123\",\"title\":\"The fall of the Emperor\"}";
         JsonObject obj = jsonFromString(newBook);
         Client client = ClientBuilder.newClient();
 
@@ -152,7 +155,8 @@ public class EndpointIT {
 
         JsonValue jsonValue = getJsonValue(obj);
 
-        assertEquals(jsonValue.asJsonObject().getString("id"), "123", "Database does not reflect new book");
+        assertEquals(jsonValue.asJsonObject().getString("id"), 
+                    "123", "Database does not reflect new book");
         response.close();
     }
 }

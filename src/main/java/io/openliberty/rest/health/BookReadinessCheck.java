@@ -39,12 +39,11 @@ public class BookReadinessCheck implements HealthCheck {
 
     if (isInMaintenance) {
       return HealthCheckResponse.named(BookResource.class.getSimpleName() + "Readiness")
-                                .withData("Services", "not available").down()
-                                .build();
+          .withData("Services", "not available").down().build();
     }
-  
-    return HealthCheckResponse.named(BookResource.class.getSimpleName() + "Readiness")
-                              .withData("Services", "available").up().build();
+
+    return HealthCheckResponse.named(BookResource.class.getSimpleName() + "Readiness").withData("Services", "available")
+        .up().build();
   }
 
 }

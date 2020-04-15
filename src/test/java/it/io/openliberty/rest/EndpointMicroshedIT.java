@@ -37,14 +37,14 @@ import org.microshed.testing.jaxrs.RESTClient;
 public class EndpointMicroshedIT {
 
     @RESTClient
-    public static BookResource bookrsc;
-    
+    public static BookResource bookResource;
+
     @Test
     @DisplayName("GET - Verifying initial state of database")
     @Order(1)
     public void CheckIfInitialDatabaseIsNotEmpty() {
 
-        assertNotNull(bookrsc.listBooks());
+        assertNotNull(bookResource.listBooks());
     }
 
     @Test
@@ -52,12 +52,18 @@ public class EndpointMicroshedIT {
     @Order(2)
     public void UpdateBook() {
 
-        BookApplication book = new BookApplication("123", "The fall of the Emperor", "Nathan T Gold", "The story of a great Emperor");
-        bookrsc.updateBook("123", book);
-        Collection<BookApplication> bookCollection = bookrsc.listBooks();
-        for (BookApplication bookApp: bookCollection){
-            if (bookApp.getId().equals("123")){
-                assertEquals("Nathan T Gold", bookApp.getAuthor(), "Database does not reflect updated book");
+        BookApplication book = new BookApplication(
+            "123", 
+            "The fall of the Emperor", 
+            "Nathan T Gold", 
+            "The story of a great Emperor");
+
+        bookResource.updateBook("123", book);
+        Collection<BookApplication> bookCollection = bookResource.listBooks();
+        for (BookApplication bookApp : bookCollection) {
+            if (bookApp.getId().equals("123")) {
+                assertEquals("Nathan T Gold", bookApp.getAuthor(), 
+                             "Database does not reflect updated book");
             }
         }
     }
@@ -67,13 +73,14 @@ public class EndpointMicroshedIT {
     @Order(3)
     public void DeleteBook() {
 
-        assertNotNull(bookrsc.takeBook("123"));
+        assertNotNull(bookResource.takeBook("123"));
 
-        Collection<BookApplication> bookCollection = bookrsc.listBooks();
+        Collection<BookApplication> bookCollection = bookResource.listBooks();
 
-        for (BookApplication bookApp: bookCollection) {
-            assertFalse(bookApp.getId().equals("123"), "Database does not reflect deleted book");
-        }   
+        for (BookApplication bookApp : bookCollection) {
+            assertFalse(bookApp.getId().equals("123"), 
+                       "Database does not reflect deleted book");
+        }
     }
 
     @Test
@@ -81,13 +88,17 @@ public class EndpointMicroshedIT {
     @Order(4)
     public void addBook() {
 
-        BookApplication book = new BookApplication("123", "The fall of the Emperor", "Nathan T", "The story of a great Emperor");
-        bookrsc.depositBook(book);
+        BookApplication book = new BookApplication(
+            "123", 
+            "The fall of the Emperor", 
+            "Nathan T", 
+            "The story of a great Emperor");
+        bookResource.depositBook(book);
         boolean bookFound = false;
 
-        Collection<BookApplication> bookCollection = bookrsc.listBooks();
-        for (BookApplication bookApp: bookCollection){
-            if (bookApp.getId().equals("123")){
+        Collection<BookApplication> bookCollection = bookResource.listBooks();
+        for (BookApplication bookApp : bookCollection) {
+            if (bookApp.getId().equals("123")) {
                 bookFound = true;
             }
         }

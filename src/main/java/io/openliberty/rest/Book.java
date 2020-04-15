@@ -11,17 +11,17 @@
 
 package io.openliberty.rest;
 
-public class BookApplication {
+public class Book {
 
 	private String id;
 	private String title;
 	private String author;
 	private String description;
 
-	public BookApplication() {
+	public Book() {
 	}
 
-	public BookApplication(String id, String title, String author, String description) {
+	public Book(String id, String title, String author, String description) {
 		this.id = id;
 		this.title = title;
 		this.author = author;

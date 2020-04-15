@@ -22,40 +22,40 @@ public class BookStore {
 
 	public BookStore() {
 		books.put("123", 
-		    new BookApplication(
+		    new Book(
 				"123", 
 				"The fall of the Emperor", 
 				"Nathan T", 
 				"The story of a great Emperor"));
 		books.put("456", 
-		    new BookApplication(
+		    new Book(
 				"456", 
 				"Adventures of Willy", 
 				"James N", 
 				"The life of a great dog"));
 		books.put("789", 
-		    new BookApplication(
+		    new Book(
 				"789", 
 				"The rise of the Emperor", 
 				"Mary B", 
 				"The story of a great Emperor part 2"));
 	}
 
-	private Map<String, BookApplication> books = new HashMap<>();
+	private Map<String, Book> books = new HashMap<>();
 
-	public Collection<BookApplication> viewAllBooks() {
+	public Collection<Book> viewAllBooks() {
 		return books.values();
 	}
 
-	public BookApplication takeBook(String bookId) {
+	public Book takeBook(String bookId) {
 		return books.remove(bookId);
 	}
 
-	public void depositBook(BookApplication newBook) {
+	public void depositBook(Book newBook) {
 		books.put(newBook.getId(), newBook);
 	}
 
-	public void updateBook(String bookId, BookApplication updatedBook) {
+	public void updateBook(String bookId, Book updatedBook) {
 		books.put(bookId, updatedBook);
 	}
 }

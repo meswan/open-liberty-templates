@@ -11,7 +11,7 @@
 
 package it.io.openliberty.rest;
 
-import io.openliberty.rest.BookApplication;
+import io.openliberty.rest.Book;
 import io.openliberty.rest.BookResource;
 
 import java.util.Collection;
@@ -52,15 +52,15 @@ public class EndpointMicroshedIT {
     @Order(2)
     public void UpdateBook() {
 
-        BookApplication book = new BookApplication(
+        Book book = new Book(
             "123", 
             "The fall of the Emperor", 
             "Nathan T Gold", 
             "The story of a great Emperor");
 
         bookResource.updateBook("123", book);
-        Collection<BookApplication> bookCollection = bookResource.listBooks();
-        for (BookApplication bookApp : bookCollection) {
+        Collection<Book> bookCollection = bookResource.listBooks();
+        for (Book bookApp : bookCollection) {
             if (bookApp.getId().equals("123")) {
                 assertEquals("Nathan T Gold", bookApp.getAuthor(), 
                              "Database does not reflect updated book");
@@ -75,9 +75,9 @@ public class EndpointMicroshedIT {
 
         assertNotNull(bookResource.takeBook("123"));
 
-        Collection<BookApplication> bookCollection = bookResource.listBooks();
+        Collection<Book> bookCollection = bookResource.listBooks();
 
-        for (BookApplication bookApp : bookCollection) {
+        for (Book bookApp : bookCollection) {
             assertFalse(bookApp.getId().equals("123"), 
                        "Database does not reflect deleted book");
         }
@@ -88,7 +88,7 @@ public class EndpointMicroshedIT {
     @Order(4)
     public void addBook() {
 
-        BookApplication book = new BookApplication(
+        Book book = new Book(
             "123", 
             "The fall of the Emperor", 
             "Nathan T", 
@@ -96,8 +96,8 @@ public class EndpointMicroshedIT {
         bookResource.depositBook(book);
         boolean bookFound = false;
 
-        Collection<BookApplication> bookCollection = bookResource.listBooks();
-        for (BookApplication bookApp : bookCollection) {
+        Collection<Book> bookCollection = bookResource.listBooks();
+        for (Book bookApp : bookCollection) {
             if (bookApp.getId().equals("123")) {
                 bookFound = true;
             }

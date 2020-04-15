@@ -44,10 +44,10 @@ public class BookResource {
                 description = "Obtain a list of all books in the database.", 
                 content = @Content(mediaType = "application/json", 
                 schema = @Schema(type = SchemaType.OBJECT, 
-                implementation = BookApplication.class)))
+                implementation = Book.class)))
     @Operation(summary = "GET operation to retrieve all books.", 
                description = "Obtain a list of all books in the database.")
-    public Collection<BookApplication> listBooks() {
+    public Collection<Book> listBooks() {
         return bookStore.viewAllBooks();
     }
 
@@ -56,12 +56,12 @@ public class BookResource {
                 description = "Delete a book by its ID.", 
                 content = @Content(mediaType = "application/json", 
                 schema = @Schema(type = SchemaType.OBJECT, 
-                implementation = BookApplication.class)))
+                implementation = Book.class)))
     @Operation(summary = "DELETE operation to remove a book from the database.", 
               description = "Delete a book by its ID.")
     @Path("/{id}")
     @DELETE
-    public BookApplication takeBook(@PathParam("id") String bookId) {
+    public Book takeBook(@PathParam("id") String bookId) {
         return bookStore.takeBook(bookId);
     }
 
@@ -70,11 +70,11 @@ public class BookResource {
                 description = "Update information on a book by its ID.", 
                 content = @Content(mediaType = "application/json", 
                 schema = @Schema(type = SchemaType.OBJECT, 
-                implementation = BookApplication.class)))
+                implementation = Book.class)))
     @Operation(summary = "POST operation to update a book.", 
               description = "Update information on a book by its ID.")
     @POST
-    public void depositBook(BookApplication newBook) {
+    public void depositBook(Book newBook) {
         bookStore.depositBook(newBook);
     }
 
@@ -83,12 +83,12 @@ public class BookResource {
                 description = "Add a book to the database.", 
                 content = @Content(mediaType = "application/json", 
                 schema = @Schema(type = SchemaType.OBJECT, 
-                implementation = BookApplication.class)))
+                implementation = Book.class)))
     @Operation(summary = "PUT operation to add a book to the database.", 
               description = "Add a book to the database.")
     @Path("/{id}")
     @PUT
-    public void updateBook(@PathParam("id") String bookId, BookApplication book) {
+    public void updateBook(@PathParam("id") String bookId, Book book) {
         bookStore.updateBook(bookId, book);
     }
 }

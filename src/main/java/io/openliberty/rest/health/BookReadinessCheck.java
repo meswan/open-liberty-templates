@@ -9,7 +9,7 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package io.openliberty.health;
+package io.openliberty.rest.health;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -31,31 +31,13 @@ import io.openliberty.rest.BookResource;
 public class BookReadinessCheck implements HealthCheck {
 
   @Inject
-  @ConfigProperty(name = "io_openliberty_sample_rest_inMaintenance")
+  @ConfigProperty(name = "app_inMaintenance")
   private boolean isInMaintenance;
-  
-  public boolean isHealthy() {
-    if (isInMaintenance) {
-      return false;
-    }
-    try {
-      Client client = ClientBuilder.newClient();
-      WebTarget target = client.target("http://192.168.0.16:9080/RestServer/v1/books");
-      Response response = target.request(MediaType.APPLICATION_JSON).get();
-      
-      if (response.getStatus() != 200) {
-        return false;
-      }
-      return true;
-    } catch (Exception e) {
-      return false;
-    }
-  }
 
   @Override
   public HealthCheckResponse call() {
 
-    if (!isHealthy()) {
+    if (isInMaintenance) {
       return HealthCheckResponse.named(BookResource.class.getSimpleName() + "Readiness")
                                 .withData("Services", "not available").down()
                                 .build();

@@ -9,7 +9,7 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package io.openliberty.health;
+package io.openliberty.rest.health;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;

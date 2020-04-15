@@ -23,6 +23,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import javax.inject.Inject;
+
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
@@ -33,6 +35,8 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class BookResource {
+	@Inject
+	BookStore bookStore;
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -48,7 +52,7 @@ public class BookResource {
         summary = "GET operation to retrieve all books.",
         description = "Obtain a list of all books in the database.")
 	public Collection<BookApplication> listBooks() {
-		return BookStore.getBookStore().viewAllBooks();
+		return bookStore.viewAllBooks();
 	}
 	
 	@Produces(MediaType.APPLICATION_JSON)
@@ -66,7 +70,7 @@ public class BookResource {
 	@Path("/{id}")
 	@DELETE
 	public BookApplication takeBook(@PathParam("id") String bookId) {
-		return BookStore.getBookStore().takeBook(bookId);
+		return bookStore.takeBook(bookId);
 	}
 	
 	@Produces(MediaType.APPLICATION_JSON)
@@ -83,7 +87,7 @@ public class BookResource {
 		description = "Update information on a book by its ID.")
 	@POST
 	public void depositBook(BookApplication newBook) {
-		BookStore.getBookStore().depositBook(newBook);
+		bookStore.depositBook(newBook);
 	}
 	
 	@Produces(MediaType.APPLICATION_JSON)
@@ -101,7 +105,7 @@ public class BookResource {
 	@Path("/{id}")
 	@PUT
 	public void updateBook(@PathParam("id") String bookId, BookApplication book) {
-		BookStore.getBookStore().updateBook(bookId, book);
+		bookStore.updateBook(bookId, book);
 	}
 }
 

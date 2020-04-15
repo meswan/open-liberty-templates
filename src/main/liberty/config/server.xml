@@ -11,4 +11,6 @@
                 id="defaultHttpEndpoint" host="*" />
 
   <webApplication location="${project.name}.war" contextRoot="${app.context.root}"/>
+
+  <variable name="app_inMaintenance" value="false"/>
 </server>

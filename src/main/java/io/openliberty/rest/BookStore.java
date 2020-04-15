@@ -15,21 +15,18 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
 public class BookStore {
 
-	private static BookStore INSTANCE = new BookStore();
-	
-	private BookStore() {
+	public BookStore() {
 		books.put("123", new BookApplication("123", "The fall of the Emperor", "Nathan T",
 				"The story of a great Emperor"));
 		books.put("456", new BookApplication("456", "Adventures of Willy", "James N",
 				"The life of a great dog"));
 		books.put("789", new BookApplication("789", "The rise of the Emperor", "Mary B",
 				"The story of a great Emperor part 2"));
-	}
-	
-	public static BookStore getBookStore() {
-		return INSTANCE;
 	}
 	
 	private Map<String,BookApplication> books = new HashMap<>();

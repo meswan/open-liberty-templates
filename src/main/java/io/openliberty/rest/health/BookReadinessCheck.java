@@ -13,6 +13,7 @@ package io.openliberty.rest.health;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
@@ -32,12 +33,12 @@ public class BookReadinessCheck implements HealthCheck {
 
   @Inject
   @ConfigProperty(name = "app_inMaintenance")
-  private boolean isInMaintenance;
+  private Provider<Boolean> isInMaintenance;
 
   @Override
   public HealthCheckResponse call() {
 
-    if (isInMaintenance) {
+    if (isInMaintenance.get()) {
       return HealthCheckResponse.named(BookResource.class.getSimpleName() + "Readiness")
           .withData("Services", "not available").down().build();
     }

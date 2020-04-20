@@ -18,11 +18,17 @@
     <!-- Liberty configuration -->
     <liberty.var.default.http.port>9080</liberty.var.default.http.port>
     <liberty.var.default.https.port>9443</liberty.var.default.https.port>
-    <liberty.var.app.context.root>RestServer</liberty.var.app.context.root>
+    <liberty.var.app.context.root>/example/app</liberty.var.app.context.root>
     <liberty.var.project.name>${project.artifactId}</liberty.var.project.name>
   </properties>
   
   <dependencies>
+    <dependency>
+      <groupId>jakarta.platform</groupId>
+      <artifactId>jakarta.jakartaee-web-api</artifactId>
+      <version>8.0.0</version>
+      <scope>provided</scope>
+    </dependency>
     <dependency>
       <groupId>org.eclipse.microprofile</groupId>
       <artifactId>microprofile</artifactId>
@@ -30,12 +36,6 @@
       <type>pom</type>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>jakarta.platform</groupId>
-      <artifactId>jakarta.jakartaee-web-api</artifactId>
-      <version>8.0.0</version>
-      <scope>provided</scope>
-    </dependency>    
     <!-- For tests -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -48,13 +48,18 @@
   <build>
     <finalName>${project.artifactId}</finalName>
     <plugins>
+      <!-- Plugin to run functional tests -->
+      <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>3.2.3</version>
+      </plugin>
       <!-- Enable liberty-maven plugin -->
       <plugin>
           <groupId>io.openliberty.tools</groupId>
           <artifactId>liberty-maven-plugin</artifactId>
           <version>3.2</version>
       </plugin>
-      <!-- Plugin to run functional tests -->
       <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-failsafe-plugin</artifactId>
@@ -65,11 +70,6 @@
                 <context.root>${liberty.var.app.context.root}</context.root>
               </systemPropertyVariables>
           </configuration>
-      </plugin>
-      <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-war-plugin</artifactId>
-          <version>3.2.3</version>
       </plugin>
       <!-- Plugin to run unit tests -->
       <plugin>

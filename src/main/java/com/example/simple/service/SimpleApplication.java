@@ -9,18 +9,11 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package it.io.openliberty.rest;
+package com.example.simple.service;
 
-import org.microshed.testing.SharedContainerConfiguration;
-import org.microshed.testing.testcontainers.ApplicationContainer;
-import org.testcontainers.junit.jupiter.Container;
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
 
-
-public class EndpointSharedApplication implements SharedContainerConfiguration {
-
-    @Container
-    public static ApplicationContainer app = new ApplicationContainer()
-                    .withAppContextRoot("/RestServer")
-                    .withReadinessPath("/health/ready");
-
+@ApplicationPath("/")
+public class SimpleApplication extends Application {
 }

@@ -9,11 +9,10 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package io.openliberty.rest.health;
+package com.example.simple.service.health;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.inject.Provider;
+
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
@@ -23,28 +22,22 @@ import javax.ws.rs.client.WebTarget;
 import org.eclipse.microprofile.health.Readiness;
 import org.eclipse.microprofile.health.HealthCheck;
 import org.eclipse.microprofile.health.HealthCheckResponse;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 
-import io.openliberty.rest.BookResource;
+import com.example.simple.service.SimpleResource;
 
 @Readiness
 @ApplicationScoped
-public class BookReadinessCheck implements HealthCheck {
-
-  @Inject
-  @ConfigProperty(name = "app_inMaintenance")
-  private Provider<Boolean> isInMaintenance;
+public class SimpleReadinessCheck implements HealthCheck {
 
   @Override
   public HealthCheckResponse call() {
 
-    if (isInMaintenance.get()) {
-      return HealthCheckResponse.named(BookResource.class.getSimpleName() + "Readiness")
-          .withData("Services", "not available").down().build();
-    }
-
-    return HealthCheckResponse.named(BookResource.class.getSimpleName() + "Readiness").withData("Services", "available")
+  return HealthCheckResponse.named(SimpleResource.class.getSimpleName() + "Readiness").withData("Services", "available")
         .up().build();
-  }
 
+  /*
+  new mp health api (not being recognized)
+  return HealthCheckResponse.builder().name(SimpleResource.class.getSimpleName() + "Readiness").up("Server", "available");
+  */
+  }
 }

@@ -9,12 +9,9 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package io.openliberty.rest.health;
+package com.example.simple.service.health;
 
-import java.lang.management.ManagementFactory;
-import java.lang.management.MemoryMXBean;
-
-import io.openliberty.rest.BookResource;
+import com.example.simple.service.SimpleResource;
 
 import javax.enterprise.context.ApplicationScoped;
 import org.eclipse.microprofile.health.Liveness;
@@ -23,17 +20,12 @@ import org.eclipse.microprofile.health.HealthCheckResponse;
 
 @Liveness
 @ApplicationScoped
-public class BookLivenessCheck implements HealthCheck {
+public class SimpleLivenessCheck implements HealthCheck {
 
   @Override
   public HealthCheckResponse call() {
-    MemoryMXBean memBean = ManagementFactory.getMemoryMXBean();
-    long memUsed = memBean.getHeapMemoryUsage().getUsed();
-    long memMax = memBean.getHeapMemoryUsage().getMax();
 
-    return HealthCheckResponse.named(BookResource.class.getSimpleName() + "Liveness")
-        .withData("memory used", memUsed)
-        .withData("memory max", memMax)
-        .state(memUsed < memMax * 0.9).build();
+    return HealthCheckResponse.named(SimpleResource.class.getSimpleName() + "Liveness").withData("Services", "available")
+    .up().build();
   }
 }

@@ -2,7 +2,6 @@
 
   <featureManager>
     <feature>jaxrs-2.1</feature>
-    <feature>mpOpenAPI-1.1</feature>
     <feature>mpHealth-2.2</feature>    
     <feature>mpConfig-1.4</feature>
   </featureManager>
@@ -12,5 +11,4 @@
 
   <webApplication location="${project.name}.war" contextRoot="${app.context.root}"/>
 
-  <variable name="app_inMaintenance" value="false"/>
 </server>

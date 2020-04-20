@@ -28,10 +28,5 @@ public class SimpleReadinessCheck implements HealthCheck {
 
   return HealthCheckResponse.named(SimpleResource.class.getSimpleName() + "Readiness").withData("Services", "available")
         .up().build();
-
-  /*
-  new mp health api (not being recognized)
-  return HealthCheckResponse.builder().name(SimpleResource.class.getSimpleName() + "Readiness").up("Server", "available");
-  */
   }
 }

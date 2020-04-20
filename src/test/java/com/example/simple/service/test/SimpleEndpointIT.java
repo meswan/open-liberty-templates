@@ -21,26 +21,26 @@ import org.junit.jupiter.api.TestMethodOrder;
 public class SimpleEndpointIT {
 
     @Test
-    @DisplayName("GET")
+    @DisplayName("Test to verify GET HTTP request")
     @Order(1)
-    public void get() {
+    public void testGet() {
     }
 
     @Test
-    @DisplayName("POST")
+    @DisplayName("Test to verify POST HTTP request")
     @Order(2)
-    public void post() {
+    public void testPost() {
     }
 
     @Test
-    @DisplayName("DELETE")
+    @DisplayName("Test to verify DELETE HTTP request")
     @Order(3)
-    public void delete() {
+    public void testDelete() {
     }
 
     @Test
-    @DisplayName("PUT")
+    @DisplayName("Test to verify PUT HTTP request")
     @Order(4)
-    public void put() {
+    public void testPut() {
     }
 }

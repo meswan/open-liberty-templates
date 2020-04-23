@@ -7,7 +7,10 @@ This sample application is a simple JAX-RS Restful web service.
 
 ## Start the OpenLiberty server in development mode.
     mvn liberty:dev
+    or
+    gradle libertyDev
 
 ## Press enter to run the tests.
+    Application should be available at http://localhost:9080/example/app/simple
 
 

@@ -27,6 +27,6 @@ public class SimpleReadinessCheck implements HealthCheck {
   public HealthCheckResponse call() {
 
     return HealthCheckResponse
-            .up(SimpleResource.class.getSimpleName() + "Readiness " + "services " + "available");
+            .up(SimpleResource.class.getSimpleName() + " Readiness Check");
   }
 }

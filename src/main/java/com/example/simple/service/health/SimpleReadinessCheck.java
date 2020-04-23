@@ -26,7 +26,7 @@ public class SimpleReadinessCheck implements HealthCheck {
   @Override
   public HealthCheckResponse call() {
 
-  return HealthCheckResponse.named(SimpleResource.class.getSimpleName() + "Readiness").withData("Services", "available")
-        .up().build();
+    return HealthCheckResponse
+            .up(SimpleResource.class.getSimpleName() + "Readiness " + "services " + "available");
   }
 }

@@ -25,7 +25,7 @@ public class SimpleLivenessCheck implements HealthCheck {
   @Override
   public HealthCheckResponse call() {
 
-    return HealthCheckResponse.named(SimpleResource.class.getSimpleName() + "Liveness").withData("Services", "available")
-    .up().build();
+    return HealthCheckResponse
+            .up(SimpleResource.class.getSimpleName() + "Liveness " + "services " + "available");
   }
 }

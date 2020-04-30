@@ -30,17 +30,4 @@ public class SimpleResource {
         return "Hello!";
     }
 
-    @Path("/{id}")
-    @DELETE
-    public void delete() {
-    }
-
-    @POST
-    public void post() {
-    }
-
-    @Path("/{id}")
-    @PUT
-    public void put() {
-    }
 }

@@ -26,6 +26,6 @@ public class SimpleLivenessCheck implements HealthCheck {
   public HealthCheckResponse call() {
 
     return HealthCheckResponse
-            .up(SimpleResource.class.getSimpleName() + " Liveness Check");
+            .up(this.getClass().getSimpleName());
   }
 }

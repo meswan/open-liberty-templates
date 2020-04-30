@@ -1,4 +1,4 @@
-<server description="Simple RESTful Microservice">
+<server description="Simple Microservice">
 
   <featureManager>
     <feature>jaxrs-2.1</feature>

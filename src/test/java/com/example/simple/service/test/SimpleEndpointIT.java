@@ -20,19 +20,4 @@ public class SimpleEndpointIT {
     @DisplayName("Verify the GET REST Endpoint")
     public void testGet() {
     }
-
-    @Test
-    @DisplayName("Verify the POST REST Endpoint")
-    public void testPost() {
-    }
-
-    @Test
-    @DisplayName("Verify the DELETE REST Endpoint")
-    public void testDelete() {
-    }
-
-    @Test
-    @DisplayName("Verify the PUT REST Endpoint")
-    public void testPut() {
-    }
 }

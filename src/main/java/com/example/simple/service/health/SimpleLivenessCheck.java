@@ -11,8 +11,6 @@
 
 package com.example.simple.service.health;
 
-import com.example.simple.service.SimpleResource;
-
 import javax.enterprise.context.ApplicationScoped;
 import org.eclipse.microprofile.health.Liveness;
 import org.eclipse.microprofile.health.HealthCheck;

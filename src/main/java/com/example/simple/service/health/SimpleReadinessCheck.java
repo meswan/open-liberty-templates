@@ -17,8 +17,6 @@ import org.eclipse.microprofile.health.Readiness;
 import org.eclipse.microprofile.health.HealthCheck;
 import org.eclipse.microprofile.health.HealthCheckResponse;
 
-import com.example.simple.service.SimpleResource;
-
 @Readiness
 @ApplicationScoped
 public class SimpleReadinessCheck implements HealthCheck {

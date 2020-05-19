@@ -17,7 +17,6 @@ import org.junit.jupiter.api.DisplayName;
 public class SimpleEndpointIT {
 
     @Test
-    @DisplayName("Verify the GET REST Endpoint")
     public void testGet() {
     }
 }

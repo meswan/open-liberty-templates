@@ -17,7 +17,7 @@
     <!-- Liberty configuration -->
     <liberty.var.default.http.port>9080</liberty.var.default.http.port>
     <liberty.var.default.https.port>9443</liberty.var.default.https.port>
-    <liberty.var.app.context.root>/example</liberty.var.app.context.root>
+    <liberty.var.app.context.root>example</liberty.var.app.context.root>
     <liberty.var.project.name>${project.artifactId}</liberty.var.project.name>
   </properties>
 
@@ -58,7 +58,7 @@
       <plugin>
           <groupId>io.openliberty.tools</groupId>
           <artifactId>liberty-maven-plugin</artifactId>
-          <version>3.2</version>
+          <version>3.2.1</version>
       </plugin>
       <plugin>
           <groupId>org.apache.maven.plugins</groupId>

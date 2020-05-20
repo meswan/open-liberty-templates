@@ -24,6 +24,8 @@ public class SimpleReadinessCheck implements HealthCheck {
   @Override
   public HealthCheckResponse call() {
 
+    // if not ready logic
+    // return HealthCheckResponse.down(this.getClass().getSimpleName());
     return HealthCheckResponse
             .up(this.getClass().getSimpleName());
   }

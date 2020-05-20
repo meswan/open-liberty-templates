@@ -23,7 +23,7 @@ public class SimpleLivenessCheck implements HealthCheck {
   @Override
   public HealthCheckResponse call() {
 
-    // if not ready logic
+    // if not live logic
     // return HealthCheckResponse.down(this.getClass().getSimpleName());
     return HealthCheckResponse
             .up(this.getClass().getSimpleName());

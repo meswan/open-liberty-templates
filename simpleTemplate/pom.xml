@@ -17,8 +17,6 @@
     <!-- Liberty configuration -->
     <liberty.var.default.http.port>9080</liberty.var.default.http.port>
     <liberty.var.default.https.port>9443</liberty.var.default.https.port>
-    <liberty.var.app.context.root>example</liberty.var.app.context.root>
-    <liberty.var.project.name>${project.artifactId}</liberty.var.project.name>
   </properties>
 
   <dependencies>
@@ -67,7 +65,7 @@
           <configuration>
               <systemPropertyVariables>
                 <http.port>${liberty.var.default.http.port}</http.port>
-                <context.root>${liberty.var.app.context.root}</context.root>
+                <context.root>example</context.root>
               </systemPropertyVariables>
           </configuration>
       </plugin>

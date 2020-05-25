@@ -12,7 +12,6 @@
 package com.example.simple.service.test;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.DisplayName;
 
 public class SimpleEndpointIT {
 

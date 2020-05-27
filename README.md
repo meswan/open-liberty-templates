@@ -3,7 +3,7 @@
 This sample application is a simple JAX-RS Restful web service.
 
 ## Navigate to the sample-restful-microservice directory.
-	cd restful-microservice-template
+	cd restful-microservice-template/simpleTemplate
 
 ## Start the OpenLiberty server in development mode.
     mvn liberty:dev

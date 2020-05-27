@@ -17,6 +17,7 @@
     <!-- Liberty configuration -->
     <liberty.var.default.http.port>9080</liberty.var.default.http.port>
     <liberty.var.default.https.port>9443</liberty.var.default.https.port>
+    <liberty.var.project.name>${project.artifactId}</liberty.var.project.name>
   </properties>
 
   <dependencies>
@@ -46,7 +47,7 @@
   <build>
     <finalName>${project.artifactId}</finalName>
     <plugins>
-      <!-- Plugin to run functional tests -->
+      <!-- Plugin to build the war file -->
       <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-war-plugin</artifactId>
@@ -58,6 +59,7 @@
           <artifactId>liberty-maven-plugin</artifactId>
           <version>3.2.1</version>
       </plugin>
+      <!-- Plugin to run unit tests -->
       <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-failsafe-plugin</artifactId>
@@ -65,11 +67,11 @@
           <configuration>
               <systemPropertyVariables>
                 <http.port>${liberty.var.default.http.port}</http.port>
+                <https.port>${liberty.var.default.https.port}</https.port>
                 <context.root>example</context.root>
               </systemPropertyVariables>
           </configuration>
       </plugin>
-      <!-- Plugin to run unit tests -->
       <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>

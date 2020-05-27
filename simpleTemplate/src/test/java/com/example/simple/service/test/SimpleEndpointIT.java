@@ -10,12 +10,22 @@
  *******************************************************************************/
 
 package com.example.simple.service.test;
-
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Response;
 
 public class SimpleEndpointIT {
+    private static final String port = System.getProperty("http.port");
+    private static final String url = "http://localhost:" + port + "/example";
 
-    @Test
-    public void testGet() {
+    @Test public void testGet() {
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(url + "/app/simple");
+        Response response = target.request().get();
+        String s = response.readEntity(String.class);
+        assertEquals("Hello!", s); response.close();
     }
 }

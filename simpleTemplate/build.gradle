@@ -43,6 +43,7 @@ test {
         exceptionFormat 'full'
     }
     systemProperty 'http.port', liberty.server.var.'default.http.port'
+    systemProperty 'https.port', liberty.server.var.'default.https.port'
     systemProperty 'context.root',  liberty.server.var.'app.context.root'
 }
 

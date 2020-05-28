@@ -21,10 +21,9 @@ import javax.ws.rs.core.MediaType;
 public class SimpleResource {
 
     @GET
-    public String[] get() {
-
-        return new String[]{"Hello!", "How are you?" };
-        //return "{\"message\" : \"Hello!\"}";
+    @Path("greeting")
+    public String[] greeting() {
+        return new String[] {"Hello!", "How are you?"};
     }
 
 }

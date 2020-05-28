@@ -26,7 +26,7 @@ public class SimpleEndpointIT {
 
     @Test public void testGet() {
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(url + "/app/simple");
+        WebTarget target = client.target(url + "/app/simple/greeting");
         Response response = target.request().get();
         String s = response.readEntity(String.class);
         assertEquals("[\"Hello!\",\"How are you?\"]", s); response.close();

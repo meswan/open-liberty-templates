@@ -39,6 +39,7 @@ ext  {
 }
 
 test {
+    useJUnitPlatform()
     testLogging {
         events 'passed', 'skipped', 'failed', 'standardOut'
         exceptionFormat 'full'

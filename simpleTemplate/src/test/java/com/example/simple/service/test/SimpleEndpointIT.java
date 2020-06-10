@@ -24,7 +24,7 @@ public class SimpleEndpointIT {
     private static final String port = System.getProperty("http.port");
     private static final String url = "http://localhost:" + port + "/example";
 
-    @Test public void testGet() {
+    @Test public void testGreeting() {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(url + "/app/resource/greeting");
         Response response = target.request().get();

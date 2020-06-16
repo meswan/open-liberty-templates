@@ -42,12 +42,6 @@
             <version>5.6.2</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-rs-client</artifactId>
-            <version>3.3.6</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <build>
@@ -63,7 +57,7 @@
             <plugin>
                 <groupId>io.openliberty.tools</groupId>
                 <artifactId>liberty-maven-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>3.2.2</version>
             </plugin>
             <!-- Plugin to run unit tests -->
             <plugin>
@@ -74,7 +68,6 @@
                     <systemPropertyVariables>
                         <http.port>${liberty.var.default.http.port}</http.port>
                         <https.port>${liberty.var.default.https.port}</https.port>
-                        <context.root>example</context.root>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

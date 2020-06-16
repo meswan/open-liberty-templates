@@ -13,22 +13,11 @@ package com.example.simple.service.test;
 
 import org.junit.jupiter.api.Test;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.Response;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class SimpleEndpointIT {
-    private static final String port = System.getProperty("http.port");
-    private static final String url = "http://localhost:" + port + "/example";
+
+    private static final String httpPort = System.getProperty("http.port");
+    private static final String httpsPort = System.getProperty("https.port");
 
     @Test public void testGreeting() {
-        Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(url + "/app/resource/greeting");
-        Response response = target.request().get();
-        String s = response.readEntity(String.class);
-        assertEquals("[\"Hello!\",\"How are you?\"]", s); response.close();
     }
 }

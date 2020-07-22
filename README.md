@@ -20,9 +20,29 @@ This repository contains starter templates for Open Liberty.
     gradle libertyDev
 
 ## Docker
-    mvn package
-    docker pull openliberty/open-liberty:kernel-java8-openj9-ubi
-    docker build -t open-liberty-templates-simple-rest-template:1.0-SNAPSHOT .
-    docker run -d --name simple-rest-template -p 9080:9080 open-liberty-templates-simple-rest-template:1.0-SNAPSHOT
+ - gradle-core-template
+ 
+ 
+    docker build -t gradle-core-template:1.0-SNAPSHOT ./gradle-core-template
+    
+    docker run -d --name gradle-core-template -p 9080:9080 gradle-core-template:1.0-SNAPSHOT
+ - maven-core-template
+ 
+ 
+    docker build -t maven-core-template:1.0-SNAPSHOT ./maven-core-template
+    
+    docker run -d --name maven-core-template -p 9080:9080 maven-core-template:1.0-SNAPSHOT
+ - simple-rest-template (maven)
+ 
+ 
+    docker build -t simple-rest-template:1.0-SNAPSHOT ./simple-rest-template
+    
+    docker run -d --name simple-rest-template -p 9080:9080 simple-rest-template:1.0-SNAPSHOT
 
+ - simple-rest-template (gradle)
+ 
+ 
+    docker build -f ./simple-rest-template/Dockerfile-gradle -t simple-rest-template:1.0-SNAPSHOT ./simple-rest-template
+    
+    docker run -d --name simple-rest-template -p 9080:9080 simple-rest-template:1.0-SNAPSHOT
 

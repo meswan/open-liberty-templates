@@ -9,11 +9,11 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package com.example.simple.service;
+package com.demo.rest;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
-@ApplicationPath("/app")
-public class SimpleApplication extends Application {
+@ApplicationPath("/api")
+public class RestApplication extends Application {
 }

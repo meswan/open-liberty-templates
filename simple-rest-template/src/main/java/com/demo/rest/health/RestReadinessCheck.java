@@ -9,7 +9,7 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package com.example.simple.service.health;
+package com.demo.rest.health;
 
 import javax.enterprise.context.ApplicationScoped;
 
@@ -19,7 +19,7 @@ import org.eclipse.microprofile.health.HealthCheckResponse;
 
 @Readiness
 @ApplicationScoped
-public class SimpleReadinessCheck implements HealthCheck {
+public class RestReadinessCheck implements HealthCheck {
 
   @Override
   public HealthCheckResponse call() {

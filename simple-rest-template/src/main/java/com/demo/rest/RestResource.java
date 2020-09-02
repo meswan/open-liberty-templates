@@ -9,7 +9,7 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package com.example.simple.service;
+package com.demo.rest;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -20,7 +20,7 @@ import javax.ws.rs.core.MediaType;
 @Path("resource")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class SimpleResource {
+public class RestResource {
 
     @GET
     @Path("greeting")

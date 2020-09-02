@@ -7,7 +7,7 @@
 
   <variable name="default.http.port" defaultValue="9080"/>
   <variable name="default.https.port" defaultValue="9443"/>
-  <variable name="project.name" defaultValue="simple-service"/>
+  <variable name="project.name" defaultValue="rest-service"/>
 
   <httpEndpoint id="defaultHttpEndpoint"
     httpPort="${default.http.port}"
@@ -15,4 +15,9 @@
     host="*" />
 
   <webApplication location="${project.name}.war" contextRoot="/"/>
+
+  <applicationManager autoExpand="true"/>
+
+  <ssl id="defaultSSLConfig" trustDefaultCerts="true"/>
+  
 </server>

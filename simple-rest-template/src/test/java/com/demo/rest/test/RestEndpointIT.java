@@ -9,11 +9,11 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package com.example.simple.service.test;
+package com.demo.rest.test;
 
 import org.junit.jupiter.api.Test;
 
-public class SimpleEndpointIT {
+public class RestEndpointIT {
 
     private static final String httpPort = System.getProperty("http.port");
     private static final String httpsPort = System.getProperty("https.port");

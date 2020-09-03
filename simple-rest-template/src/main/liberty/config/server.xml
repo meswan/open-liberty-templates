@@ -18,6 +18,10 @@
 
   <applicationManager autoExpand="true"/>
 
+  <basicRegistry id="basic" realm="BasicRealm"> 
+      <!-- <user name="yourUserName" password="" />  --> 
+  </basicRegistry>
+
   <ssl id="defaultSSLConfig" trustDefaultCerts="true"/>
   
 </server>

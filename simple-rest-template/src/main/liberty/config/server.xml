@@ -1,7 +1,7 @@
 <server description="Simple Microservice">
 
   <featureManager>
-    <feature>jaxrs-2.1</feature>
+    <feature>jakartaee-8.0</feature>
     <feature>mpHealth-2.2</feature>
   </featureManager>
 
